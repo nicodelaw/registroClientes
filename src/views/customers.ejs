@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Registro de Clientes</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+  </head>
+  <body>
+
+    <!-- Navigation || Navegacion -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/#">RegistrAPP</a>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"><a href="/#">Home</a></li>
+        <li class="nav-item active"><a href="/#tabla-datos">Registro de Clientes</a></li>
+        <li class="nav-item active"><a href="/#contacto-form">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- Content || Contenido -->
+    <div class="card text-center m-0 pt-5 pb-5 bg-image" style="background-image: url('https://img.freepik.com/vector-gratis/ilustracion-soporte-al-cliente-plano-organico_23-2148899174.jpg?w=2000'); height: 100vh;">
+      <div>
+        <h1 class="card-title mb-5">APP Registro de Clientes</h1>
+        <h3 class="card-text mb-5">La RegistrAPP te permite guardar información de tu clientela en una base de datos de MySQL!</h3>
+        <button class="btn btn-primary btn-lg w-25 mx-auto mb-5" style="border-radius: 5%">
+          <a class="btn btn-primary w-100 h-100" href="/#tabla-datos">
+            Iniciar
+          </a>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabla datos cliente || Clients data table -->
+    <div class="container mt-5">
+        <div class="col">
+          <div class="col-md-7">
+            <table class="table table-bordered table-hover" id="tabla-datos">
+              <thead>
+                <tr>
+                  <td>N.</td>
+                  <td>Nombre</td>
+                  <td>Dirección</td>
+                  <td>Teléfono</td>
+                  <td>Acciones</td>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (data) { %>
+                  <% for(var i = 0; i < data.length; i++) { %>
+                    <tr>
+                      <td><%= (i + 1) %></td>
+                      <td><%= data[i].nombre %></td>
+                      <td><%= data[i].direccion %></td>
+                      <td><%= data[i].telefono %></td>
+                      <td>
+                        <a href="/delete/<%= data[i].id%>" class="btn btn-danger">Borrar</a>
+                        <a href="/update/<%= data[i].id%>" class="btn btn-info">Editar</a>
+                      </td>
+                    </tr>
+                  <% } %>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Formulario Nuevo Cliente || New client's form-->
+          <div class="col-md-5">
+
+            <div class="card-body">
+              <form action="/add" method="post">
+                <div class="form-group">
+                  <input type="text" name="nombre" placeholder="Nombre" class="form-control" autofocus>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="direccion" placeholder="Dirección" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="text" name="telefono" placeholder="Teléfono" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Guardar nuevo Cliente
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contáctenos -->
+        <div class="card text-center p-5 m-5">
+          <h1 class="card-title mb-5">Contáctenos</h1>
+          <form action="/addpqrs" method="post" id="contacto-form">
+            <div class="form-group">
+              <label for="namec">Nombre</label>
+              <input type="text" name="namec" placeholder="Nombre" id="" class="form-control w-75 mx-auto" autofocus>
+            </div>
+            <div class="form-group">
+              <label for="mail">Correo de Contacto</label>
+              <input type="text" name="mail" placeholder="Correo de Contacto" id="" class="form-control  w-75 mx-auto">
+            </div>
+            <div class="form-group">
+              <label for="phone">Teléfono de Contacto</label>
+              <input type="text" name="phone" placeholder="Teléfono de Contacto" id="" class="form-control  w-75 mx-auto">
+            </div>
+            <div class="form-group">
+              <label for="messagec">Describa su Mensaje, Petición, Queja o Reclamo</label>
+              <textarea name="messagec" id="" cols="30" rows="10" class="form-control  w-75 mx-auto" placeholder="Describa su Mensaje, Petición, Queja o Reclamo"></textarea>
+            </div>
+            <button type="submit" formmethod="post" class="btn btn-info" form="contacto-form">
+              Enviar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div>
+        <footer id="footer"class="blockquote-footer bg-dark mx-auto"> Todos los Derechos reservados </footer>
+      </div>
+</body>
+</html>
